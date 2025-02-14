@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/marques_voitures.css') }}">
+{% endblock %}
+
+{% block title %}Les Modèles - Passion Auto{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %} 
+
+    <div class="hero-voitures">
+        <h1>Les Modèles de Voitures</h1>
+        <p>Découvrez une sélection des meilleurs modèles de voitures, de la sportive à l’électrique</p>
+    </div>
+
+    <div class="car-list">
+        {% for type in types %}
+            <div class="car-item">
+                <img src="{{ type.image }}" alt="{{ type.nom }}">
+                <h3>{{ type.nom }}</h3>
+                <p>{{ type.description }}</p>
+                <a href="{{ path('voitures_par_type', {'type': type.type | lower | replace({' ': '_'}) }) }}">Voir les détails</a>
+            </div>
+        {% endfor %}
+    </div>
+
+{% endblock %}

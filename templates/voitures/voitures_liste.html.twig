@@ -1,0 +1,53 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/liste_voitures.css') }}">
+    <style>
+        .hero-voitures::after {
+            background-image: url("{{ asset('images/marques/' ~ marque|lower ~ '.png') }}");
+        }
+    </style>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            let hero = document.querySelector(".hero-voitures");
+            if (hero) {
+                let bgImage = "url('{{ asset('images/marques/' ~ marque|lower ~ '.png') }}')";
+                hero.style.setProperty("--hero-bg", bgImage);
+                hero.classList.add("update-bg");
+            }
+        });
+    </script>
+{% endblock %}
+
+{% block title %}Voitures - {{ marque }}{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div class="hero-voitures">
+
+    </div>
+
+    <div class="car-list">
+        {% if voitures is empty %}
+            <p>Aucune voiture trouvée pour cette marque.</p>
+        {% else %}
+            <div class="car-items">
+                {% for voiture in voitures %}
+                    <div class="car-item">
+                        <!-- Afficher l'image de la voiture -->
+                        <img src="{{ asset('images/voitures/' ~ voiture.image) }}" alt="{{ voiture.nom }}" class="car-image">
+                        
+                        <div class="car-details">
+                            <h4>{{ voiture.nom }}</h4>
+                            <a href="{{ path('voiture_details', { 'nom': voiture.nom|url_encode }) }}" class="btn-details">Détails</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

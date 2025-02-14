@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link href="{{ asset('styles/app.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+    <nav class="navbar">
+        <div class="navbar-container">
+            <a href="{{ path('accueil') }}" class="navbar-logo">
+                <i class="fas fa-car-side"></i>
+                Passion Auto
+            </a>
+            <div class="navbar-links">
+                <div class="nav-item">
+                    <a href="{{ path('accueil') }}" class="nav-link">Accueil</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">Modèles</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#">Hypercar</a>
+                        <a class="dropdown-item" href="#">Supercar</a>
+                        <a class="dropdown-item" href="#">SUV</a>
+                        <a class="dropdown-item" href="#">Ancienne</a>
+                        <a class="dropdown-item" href="#">Berline</a>
+                        <a class="dropdown-item" href="#">Coupé</a>
+                        <a class="dropdown-item" href="#">Pick-up</a>
+                        <a class="dropdown-item" href="#">Muscle Car</a>
+                        <a class="dropdown-item" href="#">Sportive</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="{{ path('voitures_par_marques') }}" class="nav-link">Marque</a>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">Actualités</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Dernières news</a>
+                        <a href="#" class="dropdown-item">Tests & Essais</a>
+                        <a href="#" class="dropdown-item">Événements</a>
+                    </div>
+                </div>
+                <div class="nav-item">
+                    <a href="#" class="nav-link">Communauté</a>
+                    <div class="dropdown-menu">
+                        <a href="#" class="dropdown-item">Forum</a>
+                        <a href="#" class="dropdown-item">Galerie photos</a>
+                        <a href="#" class="dropdown-item">Événements</a>
+                    </div>
+                </div>
+                <a href="#" class="navbar-cta">
+                    <i class="fas fa-user"></i>
+                    Connexion
+                </a>
+            </div>
+        </div>
+    </nav>
+{% endblock %}

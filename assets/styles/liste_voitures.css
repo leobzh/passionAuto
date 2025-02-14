@@ -1,0 +1,338 @@
+:root {
+    --primary-color: #e6b422;
+    --primary-dark: #b38a1a;
+    --secondary-color: #2d3436;
+    --accent-color: #0984e3;
+    --text-light: #f5f5f5;
+    --text-dark: #2d3436;
+    --bg-dark: #1a1a1a;
+    --card-bg: rgba(255, 255, 255, 0.1);
+    --gradient-primary: linear-gradient(135deg, var(--primary-color), var(--primary-dark));
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --logo-size: clamp(200px, 40vw, 500px);
+    --logo-blur: blur(0px);
+    --logo-opacity: 0.15;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    min-height: 100vh;
+    scroll-behavior: smooth;
+}
+
+/* Hero section avec gestion améliorée du background */
+.hero-voitures {
+    height: 70vh;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 2rem;
+    background-color: var(--bg-dark);
+    overflow: hidden;
+    isolation: isolate;
+}
+
+/* Overlay gradient pour améliorer la lisibilité */
+.hero-voitures::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+            rgba(26, 26, 26, 0.5),
+            rgba(26, 26, 26, 0.2));
+    z-index: -1;
+}
+
+/* Gestion du logo en background */
+.hero-voitures::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    opacity: 0.2;
+    /* Moins de transparence */
+    filter: grayscale(10%) blur(1px);
+    /* Réduire la grisaille pour plus de clarté */
+    z-index: -2;
+    transition: opacity 0.3s ease, transform 0.5s ease-out;
+    max-width: 800px;
+    max-height: 80%;
+}
+
+.hero-voitures:hover::before {
+    opacity: 0;
+    /* Enlève le gradient sombre */
+}
+
+/* Suppression de l'effet des bandes noires au survol */
+.hero-voitures:hover .brand-logo {
+    filter: none;
+    /* Retirer le filtre sur le logo quand on survole */
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+    /* Ombre un peu plus prononcée */
+}
+
+/* Animation du contenu */
+.hero-voitures h1 {
+    font-size: clamp(2.5rem, 5vw, 4.5rem);
+    font-weight: 800;
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin-bottom: 1rem;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 0.8s ease forwards;
+    position: relative;
+    z-index: 1;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.hero-voitures p {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    max-width: 800px;
+    transform: translateY(30px);
+    opacity: 0;
+    animation: slideUp 0.8s ease 0.2s forwards;
+    position: relative;
+    z-index: 1;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* Logo container avec effet de parallaxe */
+.brand-logo-container {
+    position: absolute;
+    width: var(--logo-size);
+    height: var(--logo-size);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: -1;
+    perspective: 1000px;
+}
+
+.brand-logo {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    filter: var(--logo-blur);
+    opacity: 0.2;
+    /* Opacité plus claire */
+    transform-style: preserve-3d;
+    transition: opacity 0.3s ease-in-out, filter 0.3s ease-out;
+    animation: logoFloat 8s ease-in-out infinite;
+}
+
+/* Effet de lumière derrière le logo */
+.brand-logo::before {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: radial-gradient(circle at center,
+            rgba(230, 180, 34, 0.15),
+            transparent 70%);
+    animation: glowPulse 4s ease-in-out infinite;
+}
+
+.brand-logo:hover {
+    opacity: 0.4;
+    /* Devenir plus clair au survol */
+    filter: blur(0);
+    /* Rendre l'image plus nette */
+}
+
+/* Particules d'arrière-plan */
+.particles {
+    position: absolute;
+    inset: 0;
+    z-index: -2;
+}
+
+.particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    opacity: 0.3;
+}
+
+/* Animations */
+/* Effet de glow pulse */
+@keyframes glowPulse {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(1);
+    }
+
+    50% {
+        opacity: 0.6;
+        transform: scale(1.1);
+    }
+}
+
+/* Animations du logo pour l'effet de flottement */
+@keyframes logoFloat {
+
+    0%,
+    100% {
+        transform: translateZ(0) rotate3d(1, 1, 1, 0deg);
+    }
+
+    25% {
+        transform: translateZ(50px) rotate3d(1, 1, 1, 5deg);
+    }
+
+    75% {
+        transform: translateZ(25px) rotate3d(1, 1, 1, -5deg);
+    }
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.3;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(var(--tx));
+        opacity: 0;
+    }
+}
+
+/* Liste des voitures avec grid responsive */
+.car-list {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+}
+
+.car-items {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    perspective: 1000px;
+}
+
+.car-item {
+    position: relative;
+    border-radius: 1rem;
+    overflow: hidden;
+    transform-style: preserve-3d;
+    transition: var(--transition-smooth);
+}
+
+.car-item::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--gradient-primary);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.car-item:hover {
+    transform: translateY(-10px) rotateX(5deg) rotateY(3deg);
+    box-shadow: var(--shadow-lg);
+}
+
+.car-item:hover::before {
+    opacity: 0.2;
+}
+
+.car-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    transition: var(--transition-smooth);
+}
+
+.car-item:hover .car-image {
+    transform: scale(1.05);
+}
+
+.car-details {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 2rem;
+    background: linear-gradient(to top,
+            rgba(0, 0, 0, 0.9),
+            rgba(0, 0, 0, 0));
+    transform: translateY(30%);
+    transition: var(--transition-smooth);
+}
+
+.car-item:hover .car-details {
+    transform: translateY(0);
+}
+
+.car-details h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+}
+
+.btn-details {
+    display: inline-block;
+    padding: 0.8rem 1.6rem;
+    background: var(--accent-color);
+    color: var(--text-light);
+    text-decoration: none;
+    border-radius: 0.5rem;
+    font-weight: 500;
+    transform: translateY(20px);
+    opacity: 0;
+    transition: var(--transition-smooth);
+}
+
+.car-item:hover .btn-details {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.btn-details:hover {
+    background: var(--primary-color);
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes slideUp {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

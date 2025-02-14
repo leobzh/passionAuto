@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/marques_voitures.css') }}">
+    <style>
+        .hero-voitures::after {
+            background-image: url('{{ asset('images/marques/' ~ 'general' ~ '.png') }}');
+        }
+    </style>
+{% endblock %}
+
+{% block title %}Voitures - Marques{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %}
+
+    <div class="hero-voitures">
+        <h1>Les Voitures par Marque</h1>
+        <p>Découvrez nos modèles de voitures par marque.</p>
+    </div>
+
+    <div class="marques-list">
+        {% if marques is empty %}
+            <p>Aucune marque trouvée.</p>
+        {% else %}
+            <div class="marques-items">
+                {% for marque in marques %}
+                    <div class="marque-card">
+                        <a href="{{ path('voitures_par_marque', { 'marque': marque }) }}">
+                            <img src="{{ asset('images/marques/' ~ marque|lower ~ '.png') }}" alt="{{ marque }}" class="marque-image">
+                            <h3>{{ marque }}</h3>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}

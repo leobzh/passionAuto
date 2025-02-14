@@ -1,0 +1,219 @@
+:root {
+    --primary-color: #ff4d00;
+    --secondary-color: #1a1a1a;
+    --accent-color: #00c6ff;
+    --text-color: #ffffff;
+    --dark-text: #1a1a1a;
+    --transition-speed: 0.3s;
+    --section-padding: 6rem 0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* Hero Section */
+.hero-section {
+    height: 100vh;
+    background: url('../images/accueil/car-background_1.jpg') no-repeat center/cover;
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.6) 50%, rgba(0, 0, 0, 0.4) 100%);
+    z-index: 1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: left;
+    padding: 0 4rem;
+    color: var(--text-color);
+    max-width: 800px;
+    margin: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+/* Animated Titles */
+.animate-title {
+    font-family: 'Racing Sans One', cursive;
+    font-size: 5.5rem;
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 1rem;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: titleReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 0.5s;
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+    background: linear-gradient(45deg, #ffffff 0%, #f0f0f0 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+@keyframes titleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.animate-subtitle {
+    font-size: 1.4rem;
+    font-weight: 300;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: subtitleReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards 1s;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+@keyframes subtitleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+        letter-spacing: 5px;
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        letter-spacing: 3px;
+    }
+}
+
+/* Hero Buttons */
+.hero-buttons {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1rem;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1.5s;
+}
+
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(-100%) rotate(45deg);
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cta-button:hover::before {
+    transform: translateX(100%) rotate(45deg);
+}
+
+/* Feature Card */
+.feature-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 2rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+.feature-card:hover {
+    transform: translateY(-10px) scale(1.02);
+    border-color: var(--primary-color);
+}
+
+.feature-icon {
+    font-size: 2.5rem;
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.feature-card:hover .feature-icon {
+    transform: rotateY(360deg);
+}
+
+/* Particle Effect */
+.hero-particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.particle {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 100%;
+    opacity: 0;
+    animation: particleFloat linear infinite;
+}
+
+@keyframes particleFloat {
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.5;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-100vh) translateX(100vw);
+        opacity: 0;
+    }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hero-content {
+        padding: 0 2rem;
+    }
+
+    .animate-title {
+        font-size: 3.5rem;
+    }
+
+    .animate-subtitle {
+        font-size: 1.1rem;
+        letter-spacing: 2px;
+    }
+}

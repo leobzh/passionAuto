@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - Passion Auto{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('styles/accueil.css') }}">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+{% endblock %}
+
+{% block body %}
+    {% include 'partials/header.html.twig' %} 
+
+    <div class="hero-section" data-parallax="scroll">
+        <div class="hero-overlay"></div>
+        
+        <!-- Particules animées -->
+        <div class="hero-particles">
+            {% for i in 1..50 %}
+                <div class="particle" style="
+                    left: {{ random(100) }}%;
+                    top: {{ random(100) }}%;
+                    animation-delay: {{ random(5) }}s;
+                    animation-duration: {{ random(15, 25) }}s;
+                "></div>
+            {% endfor %}
+        </div>
+
+        <div class="hero-content">
+            <h1 class="animate-title" data-text="Passion Auto">Passion Auto</h1>
+            <p class="animate-subtitle">Découvrez l'univers fascinant de l'automobile</p>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="mouse"></span>
+        </div>
+    </div>
+
+    <!-- Section avec fonctionnalités -->
+    <section id="features" class="features-grid">
+        <div class="feature-card" data-aos="fade-up">
+            <div class="feature-icon">
+                <i class="fas fa-trophy"></i>
+            </div>
+            <h3>Sportives</h3>
+            <p>Explorez les performances exceptionnelles des supercars et hypercars.</p>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "nom": "Voiture Sportive",
+        "type": "sportive",
+        "image": "/images/types/car_1.jpg",
+        "description": "Découvrez la performance d'une voiture sportive de classe mondiale."
+    },
+    {
+        "id": 2,
+        "nom": "Voiture Électrique",
+        "type": "electrique",
+        "image": "/images/types/car_2.jpg",
+        "description": "Une voiture écologique pour l'avenir, silencieuse et puissante."
+    },
+    {
+        "id": 3,
+        "nom": "Voiture Ancienne",
+        "type": "ancienne",
+        "image": "/images/types/car_3.jpg",
+        "description": "Redécouvrez le charme des voitures classiques avec une touche de nostalgie."
+    },
+    {
+        "id": 4,
+        "nom": "Voiture SUV",
+        "type": "suv",
+        "image": "/images/types/car_4.jpg",
+        "description": "Un véhicule tout-terrain pour les aventures en famille."
+    },
+    {
+        "id": 5,
+        "nom": "Voiture Berline",
+        "type": "berline",
+        "image": "/images/types/car_5.jpg",
+        "description": "Une voiture de luxe pour les longs trajets confortables."
+    },
+    {
+        "id": 6,
+        "nom": "Voiture Hypercar",
+        "type": "hypercar",
+        "image": "/images/types/car_6.jpg",
+        "description": "La quintessence de la performance automobile, une voiture de rêve."
+    }
+]

@@ -1,108 +1,273 @@
 {% extends 'base.html.twig' %}
 
 {% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&family=Racing+Sans+One&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{{ asset('styles/ajout_voiture.css') }}">
 {% endblock %}
 
 {% block title %}Ajouter une Voiture{% endblock %}
 
 {% block body %}
-<div class="form-container">
-    <h1>Ajouter une nouvelle voiture</h1>
-    {{ form_start(form) }}  <!-- Début du formulaire -->
-
-    <div class="form-group">
-        {{ form_label(form.type) }}
-        {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+{% include 'partials/header.html.twig' %}
+<div class="form-page">
+    <div class="background-effects">
+        <div class="bg-gradient"></div>
     </div>
 
-    <div class="form-group">
-        {{ form_label(form.marque) }}
-        {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+    <div class="form-container">
+        <div class="form-header">
+            <div class="header-content">
+                <i class="fas fa-car-side header-icon"></i>
+                <p class="header-subtitle">Ajoutez une nouvelle voiture à votre catalogue</p>
+            </div>
+            <div class="progress-bar">
+                <div class="progress-step active">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Général</span>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-camera"></i>
+                    <span>Médias</span>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-cogs"></i>
+                    <span>Technique</span>
+                </div>
+                <div class="progress-step">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Performance</span>
+                </div>
+            </div>
+        </div>
+
+        {{ form_start(voitureForm, {'attr': {'class': 'voiture-form'}}) }}
+
+        {% if errorMessages is defined %}
+            <div class="error-messages">
+                <ul>
+                    {% for message in errorMessages %}
+                        <li>{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <div class="form-content">
+            <div class="form-sidebar">
+                <nav class="sidebar-nav">
+                    <a href="#section-general" class="nav-item active">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Informations générales</span>
+                    </a>
+                    <a href="#section-media" class="nav-item">
+                        <i class="fas fa-camera"></i>
+                        <span>Médias</span>
+                    </a>
+                    <a href="#section-tech" class="nav-item">
+                        <i class="fas fa-cogs"></i>
+                        <span>Caractéristiques techniques</span>
+                    </a>
+                    <a href="#section-perf" class="nav-item">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <span>Performance</span>
+                    </a>
+                    <a href="#section-commercial" class="nav-item">
+                        <i class="fas fa-tag"></i>
+                        <span>Commercial</span>
+                    </a>
+                    <a href="#section-description" class="nav-item">
+                        <i class="fas fa-align-left"></i>
+                        <span>Description</span>
+                    </a>
+                </nav>
+            </div>
+
+            <div class="form-main">
+                <section id="section-general" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-info-circle"></i>
+                        <h3>Informations générales</h3>
+                    </div>
+                    <div class="form-grid">
+                        {{ form_row(voitureForm.type, {
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Type de véhicule'
+                            }
+                        }) }}
+                        {{ form_row(voitureForm.marque, {
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Marque du véhicule'
+                            }
+                        }) }}
+                        {{ form_row(voitureForm.nom, {
+                            'attr': {
+                                'class': 'form-control',
+                                'placeholder': 'Nom du véhicule'
+                            }
+                        }) }}
+                    </div>
+                </section>
+
+                <section id="section-media" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-camera"></i>
+                        <h3>Médias</h3>
+                    </div>
+                    <div class="media-upload-grid">
+                        <div class="upload-box">
+                            {{ form_widget(voitureForm.image, {'attr': {'class': 'form-control hidden-input'}}) }}
+                            <label for="{{ voitureForm.image.vars.id }}" class="upload-label">
+                                <i class="fas fa-image"></i>
+                                <span>Image principale</span>
+                                <small>Cliquez ou glissez une image</small>
+                            </label>
+                        </div>
+                        <div class="upload-box">
+                            {{ form_widget(voitureForm.modele3d, {'attr': {'class': 'form-control hidden-input'}}) }}
+                            <label for="{{ voitureForm.modele3d.vars.id }}" class="upload-label">
+                                <i class="fas fa-cube"></i>
+                                <span>Modèle 3D</span>
+                                <small>Cliquez ou glissez un fichier 3D</small>
+                            </label>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-tech" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-cogs"></i>
+                        <h3>Caractéristiques techniques</h3>
+                    </div>
+                    <div class="specs-grid">
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.moteur, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fa-solid fa-car-side icon-overlay"></i>
+                        </div>
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.puissance, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fas fa-horse icon-overlay"></i>
+                        </div>
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.couple, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fas fa-sync icon-overlay"></i>
+                        </div>
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.transmission, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fas fa-cog icon-overlay"></i>
+                        </div>
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.carburant, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fa-solid fa-gas-pump icon-overlay"></i>
+                        </div>
+                        <div class="spec-card">
+                            {{ form_row(voitureForm.suspension, {'attr': {'class': 'form-control'}}) }}
+                            <i class="fa-solid fa-gears icon-overlay"></i>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-perf" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-tachometer-alt"></i>
+                        <h3>Performance</h3>
+                    </div>
+                    <div class="performance-grid">
+                        <div class="perf-card">
+                            {{ form_row(voitureForm.acceleration, {
+                                'attr': {
+                                    'class': 'form-control',
+                                    'required': 'required'
+                                }
+                            }) }}
+                            <div class="perf-indicator">0-100 km/h</div>
+                        </div>
+                        <div class="perf-card">
+                            {{ form_row(voitureForm.vitesse, {
+                                'attr': {
+                                    'class': 'form-control',
+                                    'pattern': '\d+',
+                                    'required': 'required',
+                                    'title': 'Veuillez entrer un nombre entier valide (ex: 250)'
+                                }
+                            }) }}
+                            <div class="perf-indicator">Vitesse max</div>
+                        </div>
+                        <div class="perf-card">
+                            {{ form_row(voitureForm.poids, {
+                                'attr': {
+                                    'class': 'form-control',
+                                    'pattern': '\d+',
+                                    'required': 'required',
+                                    'title': 'Veuillez entrer un nombre entier valide (ex: 1500)'
+                                }
+                            }) }}
+                            <div class="perf-indicator">Masse</div>
+                        </div>
+                        <div class="perf-card">
+                            {{ form_row(voitureForm.autonomie, {
+                                'attr': {
+                                    'class': 'form-control',
+                                    'pattern': '\d+',
+                                    'required': 'required',
+                                    'title': 'Veuillez entrer un nombre entier valide (ex: 500)'
+                                }
+                            }) }}
+                            <div class="perf-indicator">Autonomie</div>
+                        </div>
+                    </div>
+                </section>
+
+                <section id="section-commercial" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-tag"></i>
+                        <h3>Informations commerciales</h3>
+                    </div>
+                    <div class="commercial-grid">
+                        {{ form_row(voitureForm.prix, {
+                            'attr': {
+                                'class': 'form-control price-input',
+                                'data-currency': '€',
+                                'pattern': '\d+(\.\d{1,2})?',
+                                'required': 'required',
+                                'title': 'Veuillez entrer un nombre valide (ex: 30000.50)'
+                            }
+                        }) }}
+                        {{ form_row(voitureForm.sortieAt, {
+                            'label': 'Date de sortie',
+                            'attr': {'class': 'form-control date-input'}
+                        }) }}
+                    </div>
+                </section>
+
+                <section id="section-description" class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-align-left"></i>
+                        <h3>Description détaillée</h3>
+                    </div>
+                    {{ form_row(voitureForm.description, {
+                        'attr': {
+                            'class': 'form-control description-input',
+                            'rows': 8,
+                            'placeholder': 'Décrivez en détail les caractéristiques du véhicule...'
+                        }
+                    }) }}
+                </section>
+            </div>
+        </div>
+
+        <div class="form-footer">
+            <button type="button" class="btn-secondary">Annuler</button>
+            <button type="submit" class="btn-submit">
+                <i class="fas fa-check"></i>
+                Ajouter la voiture
+            </button>
+        </div>
+
+        {{ form_end(voitureForm) }}
     </div>
-
-    <div class="form-group">
-        {{ form_label(form.nom) }}
-        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.image) }}
-        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.modele3d) }}
-        {{ form_widget(form.modele3d, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.moteur) }}
-        {{ form_widget(form.moteur, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.puissance) }}
-        {{ form_widget(form.puissance, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.couple) }}
-        {{ form_widget(form.couple, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.acceleration) }}
-        {{ form_widget(form.acceleration, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.vitesse) }}
-        {{ form_widget(form.vitesse, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.poids) }}
-        {{ form_widget(form.poids, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.transmission) }}
-        {{ form_widget(form.transmission, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.sortieAt) }}
-        {{ form_widget(form.sortieAt, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.prix) }}
-        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.description) }}
-        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.autonomie) }}
-        {{ form_widget(form.autonomie, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.carburant) }}
-        {{ form_widget(form.carburant, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <div class="form-group">
-        {{ form_label(form.suspension) }}
-        {{ form_widget(form.suspension, {'attr': {'class': 'form-control'}}) }}
-    </div>
-
-    <button type="submit" class="btn-submit">Ajouter</button>
-
-    {{ form_end(form) }}  <!-- Fin du formulaire -->
 </div>
 {% endblock %}

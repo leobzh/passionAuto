@@ -7,9 +7,9 @@ use App\Form\VoitureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
-
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class AccueilController extends AbstractController
 {
@@ -23,13 +23,28 @@ final class AccueilController extends AbstractController
     }
 
     #[Route('/ajouter', name: 'voiture_ajouter')]
-    public function ajouterVoiture(Request $request, EntityManagerInterface $em): Response
+    public function ajouterVoiture(Request $request, EntityManagerInterface $em, ValidatorInterface $validator): Response
     {
         $voiture = new DetailsVoitures();
         $voitureForm = $this->createForm(VoitureType::class, $voiture);
         $voitureForm->handleRequest($request);
 
-        if ($voitureForm->isSubmitted()) {
+        if ($voitureForm->isSubmitted() && $voitureForm->isValid()) {
+            // Vérification supplémentaire des données avant de les persister
+            $errors = $validator->validate($voiture);
+            if (count($errors) > 0) {
+                // Gérer les erreurs de validation
+                $errorMessages = [];
+                foreach ($errors as $error) {
+                    $errorMessages[] = $error->getMessage();
+                }
+                // Retourner les erreurs à l'utilisateur
+                return $this->render('voitures/ajouter_voiture.html.twig', [
+                    "voitureForm" => $voitureForm->createView(),
+                    "errorMessages" => $errorMessages,
+                ]);
+            }
+
             $em->persist($voiture);
             $em->flush();
 
@@ -38,66 +53,7 @@ final class AccueilController extends AbstractController
 
         return $this->render('voitures/ajouter_voiture.html.twig', [
             "voitureForm" => $voitureForm,
-            "form" => $voitureForm->createView()
         ]);
     }
-
-    #[Route('/fakedata', name: 'fake')]
-    public function fakeNew(EntityManagerInterface $em): void
-    {
-        // Création des données des voitures McLaren
-        $mclarenData = [
-            [
-                'type' => 'Hypercar',
-                'marque' => 'McLaren',
-                'nom' => 'Solus GT',
-                'image' => 'mclaren_solus_gt.jpg',
-                'modele_3d' => '/models/mclaren_solus_gt.glb',
-                'moteur' => 'V10 5.2L',
-                'puissance' => 830,
-                'couple' => 650,
-                'acceleration_0_100' => 2.5,
-                'vitesse_max' => 322,
-                'poids' => 1400,
-                'transmission' => 'Boîte séquentielle 7 rapports',
-                'date_sortie' => '2023',
-                'prix' => 3000000,
-                'description' => "La McLaren Solus GT est une hypercar offrant des performances exceptionnelles et un design unique.",
-                'autonomie' => 600,
-                'carburant' => "Essence",
-                'suspension' => "Suspension sportive",
-            ]
-        ];
-
-        // Parcours du tableau pour créer chaque voiture et l'ajouter à la base de données
-        foreach (array_merge($mclarenData) as $data) {
-            $voiture = new DetailsVoitures();
-            $voiture->setNom($data['nom']);
-            $voiture->setType($data['type']);
-            $voiture->setImage($data['image']);
-            $voiture->setDescription($data['description']);
-            $voiture->setMarque($data['marque']);
-            $voiture->setModele3d($data['modele_3d']);
-            $voiture->setMoteur($data['moteur']);
-            $voiture->setPuissance($data['puissance']);
-            $voiture->setCouple($data['couple']);
-            $voiture->setAcceleration($data['acceleration_0_100']);
-            $voiture->setVitesse($data['vitesse_max']);
-            $voiture->setPoids($data['poids']);
-            $voiture->setTransmission($data['transmission']);
-            $voiture->setSortieAt($data['date_sortie']);
-            $voiture->setPrix($data['prix']);
-            $voiture->setAutonomie($data['autonomie']);
-            $voiture->setCarburant($data['carburant']);
-            $voiture->setSuspension($data['suspension']);
-
-            // Persister chaque objet
-            $em->persist($voiture);
-        }
-
-        // Sauvegarder les données en base
-        $em->flush();
-    }
-
 }
 

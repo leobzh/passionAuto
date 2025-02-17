@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\DetailsVoitures;
+use App\Form\VoitureType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 
 final class AccueilController extends AbstractController
 {
@@ -18,6 +20,26 @@ final class AccueilController extends AbstractController
     {
 
         return $this->render('accueil/index.html.twig');
+    }
+
+    #[Route('/ajouter', name: 'voiture_ajouter')]
+    public function ajouterVoiture(Request $request, EntityManagerInterface $em): Response
+    {
+        $voiture = new DetailsVoitures();
+        $voitureForm = $this->createForm(VoitureType::class, $voiture);
+        $voitureForm->handleRequest($request);
+
+        if ($voitureForm->isSubmitted()) {
+            $em->persist($voiture);
+            $em->flush();
+
+            return $this->redirectToRoute('voitures_par_marques');
+        }
+
+        return $this->render('voitures/ajouter_voiture.html.twig', [
+            "voitureForm" => $voitureForm,
+            "form" => $voitureForm->createView()
+        ]);
     }
 
     #[Route('/fakedata', name: 'fake')]

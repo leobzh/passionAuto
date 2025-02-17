@@ -1,0 +1,108 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/ajout_voiture.css') }}">
+{% endblock %}
+
+{% block title %}Ajouter une Voiture{% endblock %}
+
+{% block body %}
+<div class="form-container">
+    <h1>Ajouter une nouvelle voiture</h1>
+    {{ form_start(form) }}  <!-- Début du formulaire -->
+
+    <div class="form-group">
+        {{ form_label(form.type) }}
+        {{ form_widget(form.type, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.marque) }}
+        {{ form_widget(form.marque, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.nom) }}
+        {{ form_widget(form.nom, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.image) }}
+        {{ form_widget(form.image, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.modele3d) }}
+        {{ form_widget(form.modele3d, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.moteur) }}
+        {{ form_widget(form.moteur, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.puissance) }}
+        {{ form_widget(form.puissance, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.couple) }}
+        {{ form_widget(form.couple, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.acceleration) }}
+        {{ form_widget(form.acceleration, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.vitesse) }}
+        {{ form_widget(form.vitesse, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.poids) }}
+        {{ form_widget(form.poids, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.transmission) }}
+        {{ form_widget(form.transmission, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.sortieAt) }}
+        {{ form_widget(form.sortieAt, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.prix) }}
+        {{ form_widget(form.prix, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.description) }}
+        {{ form_widget(form.description, {'attr': {'class': 'form-control', 'rows': 4}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.autonomie) }}
+        {{ form_widget(form.autonomie, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.carburant) }}
+        {{ form_widget(form.carburant, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <div class="form-group">
+        {{ form_label(form.suspension) }}
+        {{ form_widget(form.suspension, {'attr': {'class': 'form-control'}}) }}
+    </div>
+
+    <button type="submit" class="btn-submit">Ajouter</button>
+
+    {{ form_end(form) }}  <!-- Fin du formulaire -->
+</div>
+{% endblock %}

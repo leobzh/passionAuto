@@ -83,5 +83,4 @@ final class VoituresController extends AbstractController
             'voiture' => $voiture
         ]);
     }
-
 }

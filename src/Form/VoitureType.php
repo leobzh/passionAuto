@@ -49,13 +49,6 @@ class VoitureType extends AbstractType
             ->add('image', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank(['message' => "L'URL de l'image est obligatoire."]),
-                    new Assert\Url(['message' => "L'URL doit être valide."])
-                ],
-            ])
-            ->add('modele3d', TextType::class, [
-                'constraints' => [
-                    new Assert\NotBlank(['message' => "L'URL du modèle 3D est obligatoire."]),
-                    new Assert\Url(['message' => "L'URL doit être valide."])
                 ],
             ])
             ->add('moteur', TextType::class, [
@@ -99,10 +92,9 @@ class VoitureType extends AbstractType
                 ],
                 'constraints' => [new Assert\NotBlank(['message' => 'La transmission est obligatoire.'])],
             ])
-            ->add('sortieAt', DateType::class, [
+            ->add('sortieAt', TextType::class, [
                 'constraints' => [
                     new Assert\NotBlank(['message' => 'La date de sortie est obligatoire.']),
-                    new Assert\Date(['message' => 'La date doit être valide.'])
                 ],
             ])
             ->add('prix', IntegerType::class, [

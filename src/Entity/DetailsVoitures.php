@@ -32,13 +32,7 @@ class DetailsVoitures
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "L'URL de l'image est obligatoire.")]
-    #[Assert\Url(message: "L'URL de l'image doit être valide.")]
     private ?string $image = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "L'URL du modèle 3D est obligatoire.")]
-    #[Assert\Url(message: "L'URL du modèle 3D doit être valide.")]
-    private ?string $modele3d = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "Le moteur est obligatoire.")]
@@ -80,10 +74,15 @@ class DetailsVoitures
     #[Assert\Choice(choices: ['manuelle', 'automatique', 'semi-automatique'], message: "La transmission doit être valide.")]
     private ?string $transmission = null;
 
-    #[ORM\Column(type: Types::DATE_IMMUTABLE)]
-    #[Assert\NotBlank(message: "La date de sortie est obligatoire.")]
-    #[Assert\Type(type: \DateTimeImmutable::class, message: "La date de sortie doit être valide.")]
-    private ?\DateTimeImmutable $sortieAt = null;
+    #[ORM\Column(length: 255)]
+    #[Assert\NotBlank(message: "L'année est obligatoire.")]
+    #[Assert\Regex(
+        pattern: "/^\d{4}$/",
+        message: "L'année doit être composée de 4 chiffres."
+    )]
+    private ?string $sortieAt = null;
+
+
 
     #[ORM\Column]
     #[Assert\NotBlank(message: "Le prix est obligatoire.")]
@@ -161,18 +160,6 @@ class DetailsVoitures
     public function setImage(string $image): static
     {
         $this->image = $image;
-
-        return $this;
-    }
-
-    public function getModele3d(): ?string
-    {
-        return $this->modele3d;
-    }
-
-    public function setModele3d(string $modele3d): static
-    {
-        $this->modele3d = $modele3d;
 
         return $this;
     }
@@ -261,12 +248,12 @@ class DetailsVoitures
         return $this;
     }
 
-    public function getSortieAt(): ?\DateTimeImmutable
+    public function getSortieAt(): ?string
     {
         return $this->sortieAt;
     }
 
-    public function setSortieAt(\DateTimeImmutable $sortieAt): static
+    public function setSortieAt(string $sortieAt): static
     {
         $this->sortieAt = $sortieAt;
 

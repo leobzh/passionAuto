@@ -44,15 +44,7 @@
 
         {{ form_start(voitureForm, {'attr': {'class': 'voiture-form'}}) }}
 
-        {% if errorMessages is defined %}
-            <div class="error-messages">
-                <ul>
-                    {% for message in errorMessages %}
-                        <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        {% endif %}
+
 
         <div class="form-content">
             <div class="form-sidebar">
@@ -124,14 +116,6 @@
                                 <i class="fas fa-image"></i>
                                 <span>Image principale</span>
                                 <small>Cliquez ou glissez une image</small>
-                            </label>
-                        </div>
-                        <div class="upload-box">
-                            {{ form_widget(voitureForm.modele3d, {'attr': {'class': 'form-control hidden-input'}}) }}
-                            <label for="{{ voitureForm.modele3d.vars.id }}" class="upload-label">
-                                <i class="fas fa-cube"></i>
-                                <span>Modèle 3D</span>
-                                <small>Cliquez ou glissez un fichier 3D</small>
                             </label>
                         </div>
                     </div>

@@ -124,7 +124,7 @@ class VoitureType extends AbstractType
                 'choices' => [
                     'Essence' => 'essence',
                     'Diesel' => 'diesel',
-                    'Électrique' => 'electrique',
+                    'Électrique' => 'électrique',
                     'Hybride' => 'hybride',
                 ],
                 'constraints' => [new Assert\NotBlank(['message' => 'Le type de carburant est obligatoire.'])],

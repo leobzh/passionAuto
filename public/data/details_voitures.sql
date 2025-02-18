@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 fév. 2025 à 15:23
+-- Généré le : mar. 18 fév. 2025 à 15:56
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -48,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `details_voitures` (
   `carburant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `suspension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=172 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `details_voitures`
@@ -149,7 +149,8 @@ INSERT INTO `details_voitures` (`id`, `type`, `marque`, `nom`, `image`, `moteur`
 (168, 'berline', 'Lotus', 'Emira', 'lotus_emira.jpg', 'V6 3.5L Supercharged', 400, 420, 4.3, 290, 1405, 'semi-automatique', '2022', 100000, 'Dernière Lotus à moteur thermique, l\'Emira allie élégance, sportivité et maniabilité exceptionnelle.', 500, 'essence', 'Sport'),
 (169, 'berline', 'Lotus', 'Eletre', 'lotus_eletre.jpg', 'Électrique, 2 moteurs', 905, 985, 2.9, 260, 1400, 'automatique', '2023', 120000, 'Premier SUV électrique de Lotus, l\'Eletre combine luxe et performances pour une conduite', 600, 'électrique', 'Confort/Sport'),
 (170, 'berline', 'Lotus', 'Exige Final Edition', 'lotus_exige_final_edition.jpg', 'V6 3.5L Supercharged', 430, 440, 3.7, 290, 1175, 'manuelle', '2021', 110000, 'La version ultime de la mythique Exige, axée sur la légèreté et la performance pure.', 400, 'essence', 'Sport'),
-(171, 'berline', 'Lotus', 'Elise Final Edition', 'lotus_elise_final_edition.jpg', '4-cyl. 1.8L Supercharged', 240, 244, 4.1, 237, 922, 'manuelle', '2021', 60000, 'L\'ultime édition de l\'iconique Lotus Elise, une voiture ultra légère pour un plaisir de conduite maximal.', 500, 'essence', 'Sport');
+(171, 'berline', 'Lotus', 'Elise Final Edition', 'lotus_elise_final_edition.jpg', '4-cyl. 1.8L Supercharged', 240, 244, 4.1, 237, 922, 'manuelle', '2021', 60000, 'L\'ultime édition de l\'iconique Lotus Elise, une voiture ultra légère pour un plaisir de conduite maximal.', 500, 'essence', 'Sport'),
+(172, 'berline', 'Audi', 'TT 1.8T', 'audi_tt1.8t.jpg', '1.8L Turbo 4-cyl', 180, 235, 7.9, 226, 1260, 'manuelle', '1999', 35000, 'Modèle de base avec un moteur turbo offrant un bon compromis entre performance et économie.', 700, 'essence', 'Sport');
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

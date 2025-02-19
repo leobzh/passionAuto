@@ -1,0 +1,60 @@
+.tests-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.tests-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.tests-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.tests-header .subtitle {
+    font-size: 1.25rem;
+    color: #777;
+}
+
+.tests-articles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.test-card {
+    flex: 1 1 calc(33.333% - 2rem);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.test-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.test-card .test-title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #333;
+}
+
+.test-card .test-date {
+    font-size: 0.9rem;
+    margin: 0 1rem 1rem;
+    color: #777;
+}
+
+.test-card .test-content {
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+    color: #555;
+}

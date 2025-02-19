@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/dernieres_news.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="news-container">
+    <section class="news-header">
+        <h1>Dernières Nouvelles</h1>
+        <p class="subtitle">Restez informé avec les dernières mises à jour</p>
+    </section>
+
+    <section class="news-articles">
+        <article class="news-card">
+            <h2 class="news-title">Titre de la Nouvelle 1</h2>
+            <p class="news-date">Publié le 01 Octobre 2023</p>
+            <p class="news-content">Contenu de la nouvelle 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+        <article class="news-card">
+            <h2 class="news-title">Titre de la Nouvelle 2</h2>
+            <p class="news-date">Publié le 02 Octobre 2023</p>
+            <p class="news-content">Contenu de la nouvelle 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+    </section>
+</main>
+{% endblock %}

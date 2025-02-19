@@ -10,10 +10,10 @@
 <main class="car-details">
     <section class="car-header">
         <div class="speed-lines"></div>
-            <div class="speed-layer speed-layer-1"></div>
-            <div class="speed-layer speed-layer-2"></div>
-            <div class="speed-layer speed-layer-3"></div>
-            <div class="speed-layer-flash"></div>
+        <div class="speed-layer speed-layer-1"></div>
+        <div class="speed-layer speed-layer-2"></div>
+        <div class="speed-layer speed-layer-3"></div>
+        <div class="speed-layer-flash"></div>
         <div class="header-content">
             <h1 class="brand-name">{{ voiture.marque }}</h1>
             <h2 class="model-name">{{ voiture.nom }}</h2>
@@ -22,9 +22,9 @@
 
     <section class="car-showcase">
         <div class="parallax-container">
-            <img 
-                src="{{ asset('images/voitures/' ~ voiture.image) }}" 
-                alt="{{ voiture.marque }} {{ voiture.nom }}" 
+            <img
+                src="{{ asset('images/voitures/' ~ voiture.image) }}"
+                alt="{{ voiture.marque }} {{ voiture.nom }}"
                 class="car-image"
                 loading="eager"
             >
@@ -32,21 +32,33 @@
     </section>
 
     <section class="car-info">
-        <div class="info-card"><strong>Moteur</strong>{{ voiture.moteur }}</div>
-        <div class="info-card"><strong>Puissance</strong>{{ voiture.puissance }} CV</div>
-        <div class="info-card"><strong>Couple</strong>{{ voiture.couple }} Nm</div>
-        <div class="info-card"><strong>0-100 km/h</strong>{{ voiture.acceleration }} s</div>
-        <div class="info-card"><strong>Vitesse max</strong>{{ voiture.vitesse }} km/h</div>
-        <div class="info-card"><strong>Poids</strong>{{ voiture.poids }} kg</div>
-        <div class="info-card"><strong>Transmission</strong>{{ voiture.transmission }}</div>
-        <div class="info-card"><strong>Autonomie</strong>{{ voiture.autonomie }} km</div>
-        <div class="info-card"><strong>Carburant</strong>{{ voiture.carburant }}</div>
-        <div class="info-card"><strong>Suspension</strong>{{ voiture.suspension }}</div>
-        <div class="info-card"><strong>Prix</strong>{{ voiture.prix | number_format(0, ',', ' ') }} €</div>
-        
+        <div class="info-card"><strong>Moteur</strong> {{ voiture.moteur }}</div>
+        <div class="info-card"><strong>Puissance</strong> {{ voiture.puissance }} CV</div>
+        <div class="info-card"><strong>Couple</strong> {{ voiture.couple }} Nm</div>
+        <div class="info-card"><strong>0-100 km/h</strong> {{ voiture.acceleration }} s</div>
+        <div class="info-card"><strong>Vitesse max</strong> {{ voiture.vitesse }} km/h</div>
+        <div class="info-card"><strong>Poids</strong> {{ voiture.poids }} kg</div>
+        <div class="info-card"><strong>Transmission</strong> {{ voiture.transmission }}</div>
+        <div class="info-card"><strong>Autonomie</strong> {{ voiture.autonomie }} km</div>
+        <div class="info-card"><strong>Carburant</strong> {{ voiture.carburant }}</div>
+        <div class="info-card"><strong>Suspension</strong> {{ voiture.suspension }}</div>
+        <div class="info-card"><strong>Prix</strong> {{ voiture.prix | number_format(0, ',', ' ') }} €</div>
+
         <div class="description-card">
             <strong>À propos de {{ voiture.nom }}</strong>
             {{ voiture.description }}
+        </div>
+
+        <!-- Affichage des catégories -->
+        <div class="categories-card">
+            <strong>Catégories</strong>
+            <div class="categories-grid">
+                {% for category in voiture.categories %}
+                    <div class="category-tag">
+                        {{ category.name }}
+                    </div>
+                {% endfor %}
+            </div>
         </div>
     </section>
 </main>
@@ -56,14 +68,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const parallaxContainer = document.querySelector('.parallax-container');
     const carImage = document.querySelector('.car-image');
     let lastScrollY = window.scrollY;
-    
-    // Gestion du parallaxe avec RequestAnimationFrame pour de meilleures performances
+
     function updateParallax() {
         if (parallaxContainer && carImage) {
             const rect = parallaxContainer.getBoundingClientRect();
             const scrollPercent = rect.top / window.innerHeight;
-            
-            // Applique une transformation uniquement si l'élément est visible
+
             if (rect.top < window.innerHeight && rect.bottom > 0) {
                 const transform = `translateY(${scrollPercent * 50}px) scale(${1 + Math.abs(scrollPercent) * 0.1})`;
                 carImage.style.transform = transform;

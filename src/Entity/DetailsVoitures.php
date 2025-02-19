@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\DetailsVoituresRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,11 +16,6 @@ class DetailsVoitures
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
-
-    #[ORM\Column(length: 255)]
-    #[Assert\NotBlank(message: "Le type de véhicule est obligatoire.")]
-    #[Assert\Choice(choices: ['berline', 'SUV', 'coupé', 'break', 'pickup', 'sportive', 'électrique', 'hybride'], message: "Le type de véhicule doit être valide.")]
-    private ?string $type = null;
 
     #[ORM\Column(length: 255)]
     #[Assert\NotBlank(message: "La marque du véhicule est obligatoire.")]
@@ -111,23 +108,16 @@ class DetailsVoitures
     #[Assert\Length(max: 100, maxMessage: "Le type de suspension ne doit pas dépasser {{ limit }} caractères.")]
     private ?string $suspension = null;
 
+    #[ORM\ManyToMany(targetEntity: CategoriesVoitures::class, inversedBy: 'voitures')]
+    private Collection $categories;
+
+    
+
     public function getId(): ?int
     {
         return $this->id;
     }
-
-    public function getType(): ?string
-    {
-        return $this->type;
-    }
-
-    public function setType(string $type): static
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
+    
     public function getMarque(): ?string
     {
         return $this->marque;
@@ -316,6 +306,35 @@ class DetailsVoitures
     public function setSuspension(string $suspension): static
     {
         $this->suspension = $suspension;
+
+        return $this;
+    }
+
+    public function __construct()
+    {
+        $this->categories = new ArrayCollection();
+    }
+
+    /**
+     * @return Collection<int, CategoriesVoitures>
+     */
+    public function getCategories(): Collection
+    {
+        return $this->categories;
+    }
+
+    public function addCategory(CategoriesVoitures $category): static
+    {
+        if (!$this->categories->contains($category)) {
+            $this->categories->add($category);
+        }
+
+        return $this;
+    }
+
+    public function removeCategory(CategoriesVoitures $category): static
+    {
+        $this->categories->removeElement($category);
 
         return $this;
     }

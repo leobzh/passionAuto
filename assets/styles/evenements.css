@@ -1,0 +1,60 @@
+.events-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+    font-family: 'Roboto', sans-serif;
+}
+
+.events-header {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.events-header h1 {
+    font-size: 2.5rem;
+    color: #333;
+}
+
+.events-header .subtitle {
+    font-size: 1.25rem;
+    color: #777;
+}
+
+.events-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+}
+
+.event-card {
+    flex: 1 1 calc(33.333% - 2rem);
+    background: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.event-card .event-title {
+    font-size: 1.5rem;
+    margin: 1rem;
+    color: #333;
+}
+
+.event-card .event-date {
+    font-size: 0.9rem;
+    margin: 0 1rem 1rem;
+    color: #777;
+}
+
+.event-card .event-content {
+    font-size: 1rem;
+    margin: 0 1rem 1rem;
+    color: #555;
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/forum.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="forum-container">
+    <section class="forum-header">
+        <h1>Forum de Discussion</h1>
+        <p class="subtitle">Participez aux discussions et partagez vos idées</p>
+    </section>
+
+    <section class="forum-threads">
+        <div class="thread-card">
+            <h2 class="thread-title">Sujet de Discussion 1</h2>
+            <p class="thread-date">Posté le 01 Octobre 2023</p>
+            <p class="thread-content">Contenu du sujet 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+        <div class="thread-card">
+            <h2 class="thread-title">Sujet de Discussion 2</h2>
+            <p class="thread-date">Posté le 02 Octobre 2023</p>
+            <p class="thread-content">Contenu du sujet 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+    </section>
+</main>
+{% endblock %}

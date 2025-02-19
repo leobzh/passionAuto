@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/tests_essais.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="tests-container">
+    <section class="tests-header">
+        <h1>Tests & Essais</h1>
+        <p class="subtitle">Découvrez nos derniers tests et essais de véhicules</p>
+    </section>
+
+    <section class="tests-articles">
+        <article class="test-card">
+            <h2 class="test-title">Test du Véhicule 1</h2>
+            <p class="test-date">Publié le 01 Octobre 2023</p>
+            <p class="test-content">Contenu du test 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+        <article class="test-card">
+            <h2 class="test-title">Test du Véhicule 2</h2>
+            <p class="test-date">Publié le 02 Octobre 2023</p>
+            <p class="test-content">Contenu du test 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </article>
+    </section>
+</main>
+{% endblock %}

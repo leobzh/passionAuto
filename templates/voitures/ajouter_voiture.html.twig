@@ -42,9 +42,7 @@
             </div>
         </div>
 
-        {{ form_start(voitureForm, {'attr': {'class': 'voiture-form'}}) }}
-
-
+        {{ form_start(voitureForm, {'attr': {'class': 'voiture-form', 'data-turbo': 'false'}}) }}
 
         <div class="form-content">
             <div class="form-sidebar">
@@ -83,12 +81,17 @@
                         <h3>Informations générales</h3>
                     </div>
                     <div class="form-grid">
-                        {{ form_row(voitureForm.type, {
-                            'attr': {
-                                'class': 'form-control',
-                                'placeholder': 'Type de véhicule'
-                            }
-                        }) }}
+                        <div class="categories-wrapper">
+                        <label for="voitureForm_categories" class="block text-sm font-medium mb-2">Catégories du véhicule</label>
+                        <div class="categories-grid">
+                            {% for category in voitureForm.categories %}
+                                <div class="category-tag">
+                                    {{ form_widget(category) }}
+                                    <span>{{ form_label(category) }}</span>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
                         {{ form_row(voitureForm.marque, {
                             'attr': {
                                 'class': 'form-control',

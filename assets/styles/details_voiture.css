@@ -286,3 +286,29 @@ body {
         gap: 1rem;
     }
 }
+
+.categories-card {
+    margin-top: 2rem;
+}
+
+.categories-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.category-tag {
+    background: var(--input-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius);
+    padding: 0.5rem 1rem;
+    color: var(--text-color);
+    font-size: 0.9rem;
+    cursor: default;
+    transition: all 0.2s ease;
+}
+
+.category-tag:hover {
+    background: rgba(52, 152, 219, 0.15);
+    border-color: var(--primary-color);
+}

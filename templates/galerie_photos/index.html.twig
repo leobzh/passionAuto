@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/galerie_photos.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="gallery-container">
+    <section class="gallery-header">
+        <h1>Galerie Photos</h1>
+        <p class="subtitle">Explorez notre collection de photos</p>
+    </section>
+
+    <section class="gallery-grid">
+        <div class="photo-card">
+            <img src="{{ asset('images/galerie/photo1.jpg') }}" alt="Photo 1" class="photo-img">
+        </div>
+        <div class="photo-card">
+            <img src="{{ asset('images/galerie/photo2.jpg') }}" alt="Photo 2" class="photo-img">
+        </div>
+    </section>
+</main>
+{% endblock %}

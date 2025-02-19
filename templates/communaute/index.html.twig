@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/communaute.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="community-container">
+    <section class="community-header">
+        <h1>Communauté</h1>
+        <p class="subtitle">Rejoignez notre communauté et partagez vos expériences</p>
+    </section>
+
+    <section class="community-posts">
+        <div class="post-card">
+            <h2 class="post-title">Post de Communauté 1</h2>
+            <p class="post-date">Publié le 01 Octobre 2023</p>
+            <p class="post-content">Contenu du post 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+        <div class="post-card">
+            <h2 class="post-title">Post de Communauté 2</h2>
+            <p class="post-date">Publié le 02 Octobre 2023</p>
+            <p class="post-content">Contenu du post 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+    </section>
+</main>
+{% endblock %}

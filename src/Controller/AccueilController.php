@@ -13,12 +13,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class AccueilController extends AbstractController
 {
-   
-
     #[Route('/accueil', name: 'accueil')]
     public function index(): Response
     {
-
         return $this->render('accueil/index.html.twig');
     }
 
@@ -30,22 +27,22 @@ final class AccueilController extends AbstractController
         $voitureForm->handleRequest($request);
 
         if ($voitureForm->isSubmitted() && $voitureForm->isValid()) {
-            // Vérification supplémentaire des données avant de les persister
             $errors = $validator->validate($voiture);
             if (count($errors) > 0) {
-                // Gérer les erreurs de validation
                 $errorMessages = [];
                 foreach ($errors as $error) {
                     $errorMessages[] = $error->getMessage();
                 }
-                // Retourner les erreurs à l'utilisateur
                 return $this->render('voitures/ajouter_voiture.html.twig', [
                     "voitureForm" => $voitureForm->createView(),
                     "errorMessages" => $errorMessages,
                 ]);
             }
 
-            
+            // Associer les catégories sélectionnées à la voiture
+            foreach ($voiture->getCategories() as $category) {
+                $category->addVoiture($voiture);
+            }
 
             $em->persist($voiture);
             $em->flush();
@@ -54,8 +51,8 @@ final class AccueilController extends AbstractController
         }
 
         return $this->render('voitures/ajouter_voiture.html.twig', [
-            "voitureForm" => $voitureForm,
+            "voitureForm" => $voitureForm->createView(),
         ]);
     }
-}
 
+}

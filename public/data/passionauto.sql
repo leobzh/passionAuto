@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 18 fév. 2025 à 15:56
+-- Généré le : mer. 19 fév. 2025 à 15:56
 -- Version du serveur : 9.1.0
 -- Version de PHP : 8.3.14
 
@@ -20,6 +20,45 @@ SET time_zone = "+00:00";
 --
 -- Base de données : `passionauto`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `categories_voitures`
+--
+
+DROP TABLE IF EXISTS `categories_voitures`;
+CREATE TABLE IF NOT EXISTS `categories_voitures` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `categories_voitures`
+--
+
+INSERT INTO `categories_voitures` (`id`, `name`) VALUES
+(9, 'Sportive'),
+(10, 'SUV'),
+(11, 'Berline'),
+(12, 'Coupé'),
+(13, 'Électrique'),
+(14, 'Hybride'),
+(15, 'Pickup'),
+(16, 'Muscle'),
+(17, 'Ancienne'),
+(18, 'Supercar'),
+(19, 'Hypercar'),
+(20, 'Concept Car'),
+(21, 'Compacte'),
+(22, 'Cabriolet'),
+(23, 'GT'),
+(24, 'Luxe'),
+(25, 'Tout-terrain'),
+(26, 'Utilitaire'),
+(27, 'Familiale'),
+(28, 'Citadine');
 
 -- --------------------------------------------------------
 
@@ -48,7 +87,7 @@ CREATE TABLE IF NOT EXISTS `details_voitures` (
   `carburant` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `suspension` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=173 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=174 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Déchargement des données de la table `details_voitures`
@@ -150,7 +189,86 @@ INSERT INTO `details_voitures` (`id`, `type`, `marque`, `nom`, `image`, `moteur`
 (169, 'berline', 'Lotus', 'Eletre', 'lotus_eletre.jpg', 'Électrique, 2 moteurs', 905, 985, 2.9, 260, 1400, 'automatique', '2023', 120000, 'Premier SUV électrique de Lotus, l\'Eletre combine luxe et performances pour une conduite', 600, 'électrique', 'Confort/Sport'),
 (170, 'berline', 'Lotus', 'Exige Final Edition', 'lotus_exige_final_edition.jpg', 'V6 3.5L Supercharged', 430, 440, 3.7, 290, 1175, 'manuelle', '2021', 110000, 'La version ultime de la mythique Exige, axée sur la légèreté et la performance pure.', 400, 'essence', 'Sport'),
 (171, 'berline', 'Lotus', 'Elise Final Edition', 'lotus_elise_final_edition.jpg', '4-cyl. 1.8L Supercharged', 240, 244, 4.1, 237, 922, 'manuelle', '2021', 60000, 'L\'ultime édition de l\'iconique Lotus Elise, une voiture ultra légère pour un plaisir de conduite maximal.', 500, 'essence', 'Sport'),
-(172, 'berline', 'Audi', 'TT 1.8T', 'audi_tt1.8t.jpg', '1.8L Turbo 4-cyl', 180, 235, 7.9, 226, 1260, 'manuelle', '1999', 35000, 'Modèle de base avec un moteur turbo offrant un bon compromis entre performance et économie.', 700, 'essence', 'Sport');
+(172, 'berline', 'Audi', 'TT 1.8T', 'audi_tt1.8t.jpg', '1.8L Turbo 4-cyl', 180, 235, 7.9, 226, 1260, 'manuelle', '1999', 35000, 'Modèle de base avec un moteur turbo offrant un bon compromis entre performance et économie.', 700, 'essence', 'Sport'),
+(173, '', 'test', 'test', 'test', 'test', 50, 50, 2, 50, 500, 'manuelle', '2010', 5000, 'testtesttesttesttesttesttesttesttesttesttesttesttesttesttest', 500, 'essence', '50');
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `details_voitures_categories_voitures`
+--
+
+DROP TABLE IF EXISTS `details_voitures_categories_voitures`;
+CREATE TABLE IF NOT EXISTS `details_voitures_categories_voitures` (
+  `details_voitures_id` int NOT NULL,
+  `categories_voitures_id` int NOT NULL,
+  PRIMARY KEY (`details_voitures_id`,`categories_voitures_id`),
+  KEY `IDX_13517476A7BE4CE0` (`details_voitures_id`),
+  KEY `IDX_13517476C2BE606D` (`categories_voitures_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Déchargement des données de la table `details_voitures_categories_voitures`
+--
+
+INSERT INTO `details_voitures_categories_voitures` (`details_voitures_id`, `categories_voitures_id`) VALUES
+(173, 9),
+(173, 11);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `doctrine_migration_versions`
+--
+
+DROP TABLE IF EXISTS `doctrine_migration_versions`;
+CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
+  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `executed_at` datetime DEFAULT NULL,
+  `execution_time` int DEFAULT NULL,
+  PRIMARY KEY (`version`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+
+--
+-- Déchargement des données de la table `doctrine_migration_versions`
+--
+
+INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
+('DoctrineMigrations\\Version20250213151846', '2025-02-13 15:19:01', 31),
+('DoctrineMigrations\\Version20250219130008', '2025-02-19 13:00:24', 73),
+('DoctrineMigrations\\Version20250219131924', '2025-02-19 13:19:54', 159);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `messenger_messages`
+--
+
+DROP TABLE IF EXISTS `messenger_messages`;
+CREATE TABLE IF NOT EXISTS `messenger_messages` (
+  `id` bigint NOT NULL AUTO_INCREMENT,
+  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
+  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
+  `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)',
+  PRIMARY KEY (`id`),
+  KEY `IDX_75EA56E0FB7336F0` (`queue_name`),
+  KEY `IDX_75EA56E0E3BD61CE` (`available_at`),
+  KEY `IDX_75EA56E016BA31DB` (`delivered_at`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `details_voitures_categories_voitures`
+--
+ALTER TABLE `details_voitures_categories_voitures`
+  ADD CONSTRAINT `FK_13517476A7BE4CE0` FOREIGN KEY (`details_voitures_id`) REFERENCES `details_voitures` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_13517476C2BE606D` FOREIGN KEY (`categories_voitures_id`) REFERENCES `categories_voitures` (`id`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

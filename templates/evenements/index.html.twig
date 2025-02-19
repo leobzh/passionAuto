@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('styles/evenements.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+{% endblock %}
+
+{% block body %}
+{% include 'partials/header.html.twig' %} 
+<main class="events-container">
+    <section class="events-header">
+        <h1>Événements</h1>
+        <p class="subtitle">Découvrez nos prochains événements</p>
+    </section>
+
+    <section class="events-list">
+        <div class="event-card">
+            <h2 class="event-title">Événement 1</h2>
+            <p class="event-date">01 Octobre 2023</p>
+            <p class="event-content">Description de l'événement 1. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+        <div class="event-card">
+            <h2 class="event-title">Événement 2</h2>
+            <p class="event-date">02 Octobre 2023</p>
+            <p class="event-content">Description de l'événement 2. Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+        </div>
+    </section>
+</main>
+{% endblock %}

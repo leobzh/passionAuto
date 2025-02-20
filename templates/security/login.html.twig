@@ -1,0 +1,107 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link href="{{ asset('styles/login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block title %}Connexion - Passion Auto{% endblock %}
+
+
+{% block body %}
+<div class="login-container">
+    <!-- Éléments d'animation de fond -->
+    <div class="background-elements">
+        <div class="racing-stripe left"></div>
+        <div class="racing-stripe right"></div>
+        <div class="checkered-flag"></div>
+        <div class="tire-marks"></div>
+    </div>
+
+    <div class="login-box">
+        <div class="login-header">
+            <div class="f1-logo">
+                <div class="logo-speed-lines"></div>
+                <span class="f1-text">Login</span>
+            </div>
+            <h1>PASSION AUTO</h1>
+            <p class="subtitle">POLE POSITION ACCESS</p>
+        </div>
+
+        {% if error %}
+            <div class="alert alert-danger">
+                <i class="fas fa-flag-checkered"></i>
+                {{ error.messageKey|trans(error.messageData, 'security') }}
+            </div>
+        {% endif %}
+
+        {% if app.user %}
+            <div class="user-status">
+                <i class="fas fa-trophy"></i>
+                SESSION ACTIVE: {{ app.user.userIdentifier }}
+                <a href="{{ path('app_logout') }}" class="logout-link">
+                    <i class="fas fa-flag"></i> PIT STOP
+                </a>
+            </div>
+        {% endif %}
+
+        <form method="post" class="login-form">
+            <div class="form-group">
+                <label for="inputUsername">
+                    <i class="fas fa-helmet-safety"></i> DRIVER PSEUDO
+                </label>
+                <div class="input-wrapper">
+                    <input type="text" 
+                           value="{{ last_username }}" 
+                           name="username" 
+                           id="inputUsername" 
+                           class="form-control" 
+                           autocomplete="username" 
+                           required 
+                           autofocus>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="inputPassword">
+                    <i class="fas fa-key"></i> PADDOCK PASS
+                </label>
+                <div class="input-wrapper">
+                    <input type="password" 
+                           name="password" 
+                           id="inputPassword" 
+                           class="form-control" 
+                           autocomplete="current-password" 
+                           required>
+                </div>
+            </div>
+
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+            <div class="remember-me">
+                <label class="checkbox-container">
+                    <input type="checkbox" name="_remember_me">
+                    <span class="checkmark"></span>
+                    <span>DRS ENABLED</span>
+                </label>
+            </div>
+
+            <button class="login-btn" type="submit">
+                <span class="btn-content">
+                    <i class="fas fa-flag-checkered"></i>
+                    <span>LIGHTS OUT</span>
+                </span>
+                <span class="btn-effect"></span>
+            </button>
+
+            <div class="additional-links">
+                <a href="#" class="forgot-password">
+                    <i class="fas fa-wrench"></i> RESET PASS
+                </a>
+                <a href="#" class="register">
+                    <i class="fas fa-user-plus"></i> NEW DRIVER
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

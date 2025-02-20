@@ -51,10 +51,16 @@
                 <div class="nav-item">
                     <a href="{{ path('voiture_ajouter') }}" class="nav-link">Ajouter une voiture</a>
                 </div>
-                <a href="#" class="navbar-cta">
-                    <i class="fas fa-user"></i>
-                    Connexion
-                </a>
+                {% if is_granted('ROLE_USER', 'ROLE_ADMIN')%}
+                    <a href="/logout" class="navbar-cta">
+                        Déconnexion
+                    </a>
+                {% else %}
+                    <a href="/login" class="navbar-cta">
+                        <i class="fas fa-user"></i>
+                        Connexion
+                    </a>
+                {% endif %}
             </div>
         </div>
     </nav>

@@ -119,6 +119,7 @@
 
 .navbar-cta {
     background: var(--primary-color);
+    size: 1.2rem;
     color: white;
     padding: 0.8rem 1.5rem;
     border-radius: 50px;

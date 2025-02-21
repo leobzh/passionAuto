@@ -1,46 +1,178 @@
 .gallery-container {
-    max-width: 1200px;
+    max-width: 1400px;
     margin: 0 auto;
     padding: 2rem;
-    font-family: 'Roboto', sans-serif;
+    background-color: #f8f9fa;
 }
 
 .gallery-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    padding: 3rem 0;
+    background: linear-gradient(45deg, #1a1a1a, #333);
+    color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .gallery-header h1 {
-    font-size: 2.5rem;
-    color: #333;
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
 }
 
 .gallery-header .subtitle {
-    font-size: 1.25rem;
-    color: #777;
+    font-size: 1.5rem;
+    color: #e0e0e0;
+    font-weight: 300;
+}
+
+.filter-section {
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.filter-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    background-color: #f0f0f0;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: #333;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+    background-color: #333;
+    color: white;
+    transform: translateY(-2px);
 }
 
 .gallery-grid {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2rem;
+    margin-bottom: 3rem;
 }
 
 .photo-card {
-    flex: 1 1 calc(33.333% - 2rem);
-    border-radius: 8px;
+    border-radius: 12px;
     overflow: hidden;
+    position: relative;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .photo-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    transform: translateY(-10px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
-.photo-card .photo-img {
+.card-inner {
+    position: relative;
     width: 100%;
-    height: auto;
-    border-radius: 8px;
+    height: 100%;
+}
+
+.photo-img {
+    width: 100%;
+    height: 250px;
+    object-fit: cover;
+    display: block;
+}
+
+.card-overlay {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    padding: 1.5rem;
+    color: white;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+}
+
+.photo-card:hover .card-overlay {
+    transform: translateY(0);
+}
+
+.card-overlay h3 {
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+}
+
+.card-overlay p {
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.prev-btn,
+.next-btn {
+    padding: 0.5rem 1rem;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.prev-btn:hover,
+.next-btn:hover {
+    background-color: #555;
+}
+
+.page-numbers {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.page-numbers span {
+    width: 35px;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ddd;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.page-numbers span.active {
+    background-color: #333;
+    color: white;
+    border-color: #333;
+}
+
+@media (max-width: 768px) {
+    .gallery-header h1 {
+        font-size: 2rem;
+    }
+
+    .gallery-header .subtitle {
+        font-size: 1.2rem;
+    }
+
+    .gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 1rem;
+    }
 }

@@ -2,24 +2,63 @@
 
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('styles/galerie_photos.css') }}">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 {% endblock %}
 
 {% block body %}
-{% include 'partials/header.html.twig' %} 
-<main class="gallery-container">
-    <section class="gallery-header">
-        <h1>Galerie Photos</h1>
-        <p class="subtitle">Explorez notre collection de photos</p>
-    </section>
+    {% include 'partials/header.html.twig' %}
 
-    <section class="gallery-grid">
-        <div class="photo-card">
-            <img src="{{ asset('images/galerie/photo1.jpg') }}" alt="Photo 1" class="photo-img">
+    <div class="gallery-container">
+        <div class="gallery-header">
+            <h1>Galerie Automobile</h1>
+            <p class="subtitle">Découvrez notre collection de voitures d'exception</p>
         </div>
-        <div class="photo-card">
-            <img src="{{ asset('images/galerie/photo2.jpg') }}" alt="Photo 2" class="photo-img">
+
+        <div class="filter-section">
+            <button class="filter-btn active" data-filter="all">Toutes</button>
+            <button class="filter-btn" data-filter="sportive">Sportives</button>
+            <button class="filter-btn" data-filter="luxe">Luxe</button>
+            <button class="filter-btn" data-filter="classique">Classiques</button>
         </div>
-    </section>
-</main>
+
+        <div class="gallery-grid">
+            <div class="photo-card" data-category="sportive">
+                <div class="card-inner">
+                    <img src="{{ asset('images/galerie_photos/sport1.jpg') }}" alt="Voiture sportive" class="photo-img">
+                    <div class="card-overlay">
+                        <h3>Ferrari F8 Tributo</h3>
+                        <p>720 chevaux de pure puissance</p>
+                    </div>
+                </div>
+            </div>
+            <div class="photo-card" data-category="sportive">
+                <div class="card-inner">
+                    <img src="{{ asset('images/galerie_photos/sport2.jpg') }}" alt="Voiture sportive" class="photo-img">
+                    <div class="card-overlay">
+                        <h3>Audi R8</h3>
+                        <p>Élégance et performance réunies dans une supercar d'exception.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="photo-card" data-category="sportive">
+                <div class="card-inner">
+                    <img src="{{ asset('images/galerie_photos/sport3.jpg') }}" alt="Voiture sportive" class="photo-img">
+                    <div class="card-overlay">
+                        <h3>Nissan GT-R</h3>
+                        <p>La légende japonaise, une puissance brute et une technologie de pointe.</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Répétez ce bloc pour chaque image -->
+        </div>
+
+        <div class="pagination">
+            <button class="prev-btn">Précédent</button>
+            <div class="page-numbers">
+                <span class="active">1</span>
+                <span>2</span>
+                <span>3</span>
+            </div>
+            <button class="next-btn">Suivant</button>
+        </div>
+    </div>
 {% endblock %}
